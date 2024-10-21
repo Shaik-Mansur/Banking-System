@@ -145,8 +145,6 @@ void pinChange() {
         printf("----------------------------------------------------\n\n\n");
     } else {
         fclose(file);
-        printf("Invalid Account Number or PIN.\n");
-        printf("----------------------------------------------------\n\n\n");
     }
 }
 
@@ -154,7 +152,7 @@ void deposit() {
     long int acc = 0, acc1 = 0;
     int pin = 0, p = 0, amount = 0;
     char name[30], n[30];
-    double balance = 0, b = 0;
+    double b = 0;
     FILE *file;
     file = fopen("Accounts File.txt", "r");
     if (file == NULL) {
@@ -191,7 +189,9 @@ void deposit() {
                 fprintf(temp, "Balance : %lf\n", b + amount);
                 printf("Current Balance : %lf\n", b + amount);
             }
-            fprintf(temp, "Pin : %d\n\n", p);
+            else {
+                fprintf(temp, "Balance : %lf\n", b);
+            }fprintf(temp, "Pin : %d\n\n", p);
         }
         fclose(file);
         fclose(temp);
@@ -203,8 +203,6 @@ void deposit() {
         fclose(file);
         fclose(temp);
         remove("temp.txt");
-        printf("Invalid Account Number or PIN.\n");
-        printf("----------------------------------------------------\n\n\n");
     }
 }
 
@@ -256,6 +254,10 @@ void withdraw() {
                 }
                 fprintf(temp, "Balance : %lf\n", b - amount);
                 printf("Current Balance : %lf\n", b - amount);
+            } 
+            else {
+                fprintf(temp, "Balance : %lf\n", b);
+
             }
             fprintf(temp, "Pin : %d\n\n", p);
         }
@@ -269,8 +271,6 @@ void withdraw() {
         fclose(file);
         fclose(temp);
         remove("temp.txt");
-        printf("Invalid Account Number or PIN.\n");
-        printf("----------------------------------------------------\n\n\n");
     }
 }
 
@@ -300,10 +300,7 @@ void balanceCheck() {
                 break;
             }
         }
-    } else {
-        printf("Invalid Account Number or PIN.\n");
-        printf("----------------------------------------------------\n\n\n");
-    }
+    } 
     fclose(file);
 }
 
